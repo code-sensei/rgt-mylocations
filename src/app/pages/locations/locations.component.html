@@ -1,7 +1,38 @@
 <div class="locations-list">
-    <div class="row flex justify-content-between">
+    <div class="top-bar row flex justify-content-between">
         <p>My Locations</p>
         <button class="btn btn-primary" (click)="open(content)">Add Location</button>
+    </div>
+    <p class="text-center" *ngIf="locations.length === 0">No Locations Saved!!!</p>
+    <div class="content table-responsive" *ngIf="locations.length > 0">
+        <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let location of locations; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td colspan="3">{{ location.name | titlecase }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn bg-none dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item text-secondary" (click)="viewProps(i, view)">View Properties</a>
+                          <a class="dropdown-item text-secondary" (click)="viewOnMap(i, viewMap)">View On Map</a>
+                          <a class="dropdown-item text-secondary" (click)="toEdit(i, edit)">Edit</a>
+                          <a class="dropdown-item text-danger" (click)="delete(i)">Delete</a>
+                        </div>
+                    </div>
+                </td>
+              </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -29,6 +60,7 @@
           <label for="category">Location Category</label>
           <div class="input-group">
             <select id="category" class="form-control" name="category" formControlName="category">
+                <option value="Select Option" [selected]="true">Select Category</option>
                 <option *ngFor="let category of categories" value="{{category.name}}">{{ category.name | titlecase }}</option>
             </select>
           </div>
@@ -45,4 +77,19 @@
       <button type="button" class="btn btn-outline-success" (click)="addLocation()" [disabled]="addLocationForm.invalid"
       [ngClass]="{'btn-success text-light': addLocationForm.valid}">Add Location</button>
     </div>
+</ng-template>
+
+<!-- Edit Location Modal -->
+<ng-template #edit let-modal>
+    <app-edit-location-form [location]="locationToEdit" [index]="locations.indexOf(locationToEdit)"></app-edit-location-form>
+</ng-template>
+
+<!-- View Location Properties -->
+<ng-template #view let-modal>
+    <app-location-details [location]="locationToView"></app-location-details>
+</ng-template>
+
+<!-- View Location Properties -->
+<ng-template #viewMap let-modal>
+    <app-location-map-details [location]="locationToView"></app-location-map-details>
 </ng-template>

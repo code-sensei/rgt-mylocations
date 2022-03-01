@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Location</h4>
+    <button type="button" class="btn-close" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editLocationForm">
+      <div class="mb-3">
+        <label for="name">Location Name</label>
+        <div class="input-group">
+          <input id="name" class="form-control" name="name" formControlName="name">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="address">Location Address</label>
+        <div class="input-group">
+          <input id="address" class="form-control" name="address" formControlName="address">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="category">Location Category</label>
+        <div class="input-group">
+          <select id="category" class="form-control" name="category" formControlName="category">
+              <option *ngFor="let category of categories" value="{{category.name}}">{{ category.name | titlecase }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="coords">Location Coordinates</label>
+        <div class="input-group">
+          <input id="coords" class="form-control" name="coordinates" formControlName="coordinates">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="updateLocation()" [disabled]="editLocationForm.invalid"
+      [ngClass]="{'btn-success': editLocationForm.valid}">Update Location</button>
+</div>

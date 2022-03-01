@@ -8,3 +8,8 @@ export interface Location {
     category: Category;
     coordinates: string;
 }
+
+export interface LatLng {
+    lat: number;
+    lng: number;
+}

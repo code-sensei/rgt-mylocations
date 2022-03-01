@@ -1,1 +1,24 @@
-<p>location-details works!</p>
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ location.name | titlecase }}</h4>
+    <button type="button" class="btn-close" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <p class="key">Address</p>
+            <p class="value">{{ location.address }}</p>
+        </div>
+        <div class="col-12 col-md-6">
+            <p class="key">Category</p>
+            <p class="value">{{ location.category.name | titlecase }}</p>
+        </div>
+        <div class="col-12 col-md-6">
+            <p class="key">Coordinates</p>
+            <p class="value">{{ location.coordinates }}</p>
+        </div>
+        <div class="col-12 col-md-6">
+            <p class="key">Name</p>
+            <p class="value">{{ location.name | titlecase }}</p>
+        </div>
+    </div>
+</div>

@@ -5,4 +5,6 @@ export const getLocations = createAction('[Location] Get Location');
 
 export const setLocations = createAction('[Location] Set Locations', props<{locations: Location[]}>());
 
-export const updateLocation = createAction('[Location] Update Location', props<{location: Location, index: Number}>());
+export const updateLocation = createAction('[Location] Update Location', props<{location: Location, index: any}>());
+
+export const deleteLocation = createAction('[Location] Delete Locations', props<{index: any}>());

@@ -4,7 +4,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { setLocations } from 'src/app/actions/locations';
 import { selectCategories } from 'src/app/selectors/categories';
-import { Category } from 'src/app/utils/types';
+import { selectLocations } from 'src/app/selectors/locations';
+import { DEFAULT_LOCATION } from 'src/app/utils/defaults';
+import { Category, Location } from 'src/app/utils/types';
 
 @Component({
   selector: 'app-locations',
@@ -15,6 +17,9 @@ export class LocationsComponent implements OnInit {
 
   addLocationForm: FormGroup;
   categories: Category[] = [];
+  locations: Location[] = [];
+  locationToEdit: Location = DEFAULT_LOCATION;
+  locationToView: Location = DEFAULT_LOCATION;
 
   constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private store: Store) {
     this.addLocationForm = this.formBuilder.group({
@@ -23,6 +28,25 @@ export class LocationsComponent implements OnInit {
       coordinates: ['', Validators.required],
       address: ['', Validators.required]
     })
+  }
+
+  viewProps(index: number, modal: any) {
+    this.locationToView = this.locations[index];
+    this.modalService.open(modal);
+  }
+
+  viewOnMap(index: number, modal: any) {
+    this.locationToView = this.locations[index];
+    this.modalService.open(modal, { size: 'xl' });
+  }
+
+  toEdit(index: any, modal: any) {
+    this.locationToEdit = this.locations[index];
+    this.modalService.open(modal);
+  }
+
+  delete(index: number) {
+
   }
 
   addLocation() {
@@ -34,11 +58,26 @@ export class LocationsComponent implements OnInit {
   getCategories() {
     // get categories from local storage
     this.store.select(selectCategories).subscribe((res) => {
+      this.categories = [];
       for (const key in res) {
         if (Object.prototype.hasOwnProperty.call(res, key)) {
           const category = res[key];
           this.categories.push(category);
           console.log('Cates', this.categories);
+        }
+      }
+    })
+  }
+
+  getLocations() {
+     // get locations from local storage
+     this.store.select(selectLocations).subscribe((res) => {
+       this.locations = [];
+      for (const key in res) {
+        if (Object.prototype.hasOwnProperty.call(res, key)) {
+          const location = res[key];
+          this.locations.push(location);
+          console.log('Cates', this.locations);
         }
       }
     })
@@ -50,6 +89,7 @@ export class LocationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
+    this.getLocations();
   }
 
 }

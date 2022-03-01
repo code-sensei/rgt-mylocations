@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,9 @@ import { reducers } from './reducers';
 import { EditCategoryFormComponent } from './components/edit-category-form/edit-category-form.component';
 import { LocationDetailsComponent } from './components/modals/location-details/location-details.component';
 import { CategoryDetailsComponent } from './components/modals/category-details/category-details.component';
+import { EditLocationFormComponent } from './components/edit-location-form/edit-location-form.component';
+import { MapComponent } from './components/map/map.component';
+import { LocationMapDetailsComponent } from './components/modals/location-map-details/location-map-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { CategoryDetailsComponent } from './components/modals/category-details/c
     CategoriesComponent,
     EditCategoryFormComponent,
     LocationDetailsComponent,
-    CategoryDetailsComponent
+    CategoryDetailsComponent,
+    EditLocationFormComponent,
+    MapComponent,
+    LocationMapDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +42,7 @@ import { CategoryDetailsComponent } from './components/modals/category-details/c
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class AppModule { }

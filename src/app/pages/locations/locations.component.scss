@@ -1,0 +1,15 @@
+.locations-list {
+    .top-bar {
+        height: 50px;
+        border: none;
+        margin-bottom: 40px;
+    }
+
+    .content {
+        .table {
+            thead {
+                border: none !important;
+            }
+        }
+    }
+}
