@@ -1,0 +1,63 @@
+<div class="categories-list">
+    <div class="top-bar row flex justify-content-between">
+        <p>My Categories</p>
+        <button class="btn btn-primary" (click)="open(content)">Add Category</button>
+    </div>
+    <p class="text-center" *ngIf="categories.length === 0">No Categories Saved!!!</p>
+    <div class="content table-responsive" *ngIf="categories.length > 0">
+        <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let category of categories; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td colspan="3">{{ category.name | titlecase }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn bg-none dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item text-secondary" (click)="view(i)">View</a>
+                          <a class="dropdown-item text-secondary" (click)="toEdit(i, edit)">Edit</a>
+                          <a class="dropdown-item text-danger" (click)="delete(i)">Delete</a>
+                        </div>
+                    </div>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ADD CATEGORY MODAL -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add a Category</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="addCategoryForm">
+        <div class="mb-3">
+          <label for="name">Category Name</label>
+          <div class="input-group">
+            <input id="name" class="form-control" name="name" formControlName="name">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success" (click)="addCategory()" [disabled]="addCategoryForm.invalid"
+        [ngClass]="{'btn-success text-light': addCategoryForm.valid}">Add Category</button>
+    </div>
+</ng-template>
+
+<!-- EDIT CATEGORY MODAL -->
+<ng-template #edit let-modal>
+    <app-edit-category-form [category]="cateToEdit" [index]="categories.indexOf(cateToEdit)" #edit></app-edit-category-form>
+</ng-template>

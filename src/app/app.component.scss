@@ -1,0 +1,12 @@
+#app {
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+
+    .content {
+        scroll-behavior: smooth;
+        overflow-y: scroll;
+        max-height: calc(100vh - 50px);
+        padding: 50px 50px 0px 50px;
+    }
+}

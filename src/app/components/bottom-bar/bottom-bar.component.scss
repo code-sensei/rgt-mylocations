@@ -1,0 +1,33 @@
+.tabs {
+    width: 100%;
+    min-height: 50px;
+    background: #FFFFFF;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    box-shadow: #000000 !important;
+    border-top: 1px solid #000000;
+
+    .tab {
+        max-width: 45%;
+        width: 45%;
+        height: 100%;
+        margin: auto;
+        text-align: center;
+        font-weight: 300;
+
+        &.active {
+            font-weight: 500;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+    }
+}

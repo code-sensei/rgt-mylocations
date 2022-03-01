@@ -1,0 +1,8 @@
+<div class="tabs row">
+    <div class="tab" [ngClass]="{'active': currentRoute.includes('locations')}" (click)="routeChange('/locations')">
+        <p>Locations</p>
+    </div>
+    <div class="tab" [ngClass]="{'active': currentRoute.includes('categories')}" (click)="routeChange('/categories')">
+        <p>Categories</p>
+    </div>
+</div>
