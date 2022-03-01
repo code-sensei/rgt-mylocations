@@ -3,9 +3,42 @@
         <p>My Locations</p>
         <button class="btn btn-primary" (click)="open(content)">Add Location</button>
     </div>
-    <p class="text-center" *ngIf="locations.length === 0">No Locations Saved!!!</p>
-    <div class="content table-responsive" *ngIf="locations.length > 0">
-        <table class="table table-borderless">
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control border-none" (keyup)="search()" [(ngModel)]="searchKey" placeholder="Search Location By Name" aria-label="Search Location By Name" aria-describedby="searchButton">
+                <!-- <button class="btn btn-outline-secondary" [ngClass]="{'btn-success text-light': searchKey !== ''}" type="button" id="searchButton" (click)="search()" [disabled]="searchKey === ''">Search</button> -->
+            </div>
+        </div>
+        <div class="col-12 col-md-3"></div>
+        <div class="col-12 col-md-3">
+            <div class="dropdown">
+                <button class="btn bg-none dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  View By Category
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" (click)="viewByCategory(null)">All Categories</a></li>
+                    <li><a class="dropdown-item" (click)="viewByCategory(category.name)" *ngFor="let category of categories">
+                        {{ category.name | titlecase }}
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="dropdown">
+                <button class="btn bg-none dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Sort
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" (click)="sort('name')">In Alphabetical Order</a></li>
+                  <li><a class="dropdown-item" (click)="sort('category')">By Category</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content table-responsive">
+        <p class="text-center" *ngIf="locations.length === 0">No Locations Saved!!!</p>
+        <table class="table table-borderless" *ngIf="locations.length > 0">
             <thead>
               <tr>
                 <th scope="col">#</th>

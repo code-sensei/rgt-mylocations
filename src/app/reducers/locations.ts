@@ -3,15 +3,22 @@ import { Location } from '../utils/types';
 // State
 import { LocationsState } from '../states/locations';
 // Actions
-import { deleteLocation, getLocations, setLocations, updateLocation } from '../actions/locations';
+import { addLocation, deleteLocation, getLocations, setLocations, updateLocation } from '../actions/locations';
 
 export const initialState: Array<Location> = LocationsState;
 
 export const locationsReducer = createReducer(
   initialState,
   on(getLocations, (state) => (state)),
+  on(addLocation, (state, { location }) => {
+      let current = Array.from(state);
+      current.push(location);
+      console.log(state, current);
+
+      return current;
+  }),
   on(setLocations, (state, { locations }) => {
-      return state.concat(locations);
+      return locations;
   }),
   on(updateLocation, (state, { location, index }) => {
     let current = Array.from(state);

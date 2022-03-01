@@ -5,6 +5,6 @@ export const CategoriesState: Category[] = [
         name: 'Restaurant'
     },
     {
-        name: 'Phaarmacy'
+        name: 'Pharmacy'
     }
 ] // Categories Initital State
