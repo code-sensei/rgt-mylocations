@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-bottom-bar',
@@ -23,6 +24,13 @@ export class BottomBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
+  ngAfterViewInit(): void {
+    $(".nav li").on('click', () => {
+      $(this).addClass("is-active").siblings().removeClass("is-active");
+    });
+  }
+ 
 }

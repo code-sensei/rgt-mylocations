@@ -3,6 +3,12 @@
         height: 50px;
         border: none;
         margin-bottom: 40px;
+
+        p {
+            color: var(--app-color-primary) !important;
+            font-size: 2rem;
+            font-weight: 500;
+        }
     }
 
     .content {
